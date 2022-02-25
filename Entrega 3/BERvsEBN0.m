@@ -107,34 +107,34 @@ for i = 1 : 1 : numel(EbNoDB)
 
 
     %     %========================== CANAL =====================================
-    %     %Iteramos varias veces el código variando EbNodB
-    %
-    %     EbNo = 10.^(EbNoDB(i)./10);
-    %
-    %
-    %     % MULTITRAYECTO---------------------
-    %     %  NOTA: El valor asignado de TAU ES 1s por requerimiento, pero en este
-    %     %  caso utilizaremos un valor más alto, para poder observar mejor el
-    %     %  comportamiento tanto de los graficos espectrales, como de BER vs EbNo
-    %
-    %     tau=2; % En segundos
-    %     a=0.2; % Amplitud
-    %     SenalMulti=[zeros(1,tau*FS2) SumModulada(1:end-tau*FS2)];
-    %     Multi=SumModulada+(a*SenalMulti);
-    %     %---------------------
-    %
-    %     % Varianza ruido
-    %     SIGMA = sqrt(ES/(2*log2(M)*EbNo));
-    %
-    %     % Introducimos ruido AWGN a la señal
-    %     AWGN= SIGMA*randn(1, length(SumModulada));
-    %     noiseSignal = Multi+ AWGN;
-    %
+         %Iteramos varias veces el código variando EbNodB
+    
+         EbNo = 10.^(EbNoDB(i)./10);
+    
+    
+         % MULTITRAYECTO---------------------
+         %  NOTA: El valor asignado de TAU ES 1s por requerimiento, pero en este
+         %  caso utilizaremos un valor más alto, para poder observar mejor el
+         %  comportamiento tanto de los graficos espectrales, como de BER vs EbNo
+    
+         tau=2; % En segundos
+          a=0.2; % Amplitud
+         SenalMulti=[zeros(1,tau*FS2) SumModulada(1:end-tau*FS2)];
+         Multi=SumModulada+(a*SenalMulti);
+         %---------------------
+    
+         % Varianza ruido
+         SIGMA = sqrt(ES/(2*log2(M)*EbNo));
+    
+         % Introducimos ruido AWGN a la señal
+         AWGN= SIGMA*randn(1, length(SumModulada));
+         noiseSignal = Multi+ AWGN;
+    
 
     %=============================== RECEPTOR =================================
     % ============================ DEMODULACION ===============================
 
-    Demodulada = Demodulacion(SumModulada,Fs,R, Span, numFilas, numColumnas, NTon,FS2);
+    Demodulada = Demodulacion(noiseSignal,Fs,R, Span, numFilas, numColumnas, NTon,FS2);
 
     %================================ FILTRAJE ================================
     for o=1:numColumnas
