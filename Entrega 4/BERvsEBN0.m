@@ -155,7 +155,7 @@ for i = 1 : 1 : numel(EbNoDB)
     rec=Ecualizador(fc, a, tau, numColumnas, recuperados);
 
     %================ CONVERSOR PARALELO - SERIE ==============================
-    Prev = cell2mat(recuperados);
+    Prev = cell2mat(rec);
     Serie = reshape(Prev',[],1)';
 
     %============================= PROCESO DE DECISIÓN ========================
